@@ -10,6 +10,10 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        sans: ['var(--font-sans)', 'Inter', 'sans-serif'],
+        serif: ['var(--font-serif)', 'Lora', 'serif'],
+      },
       colors: {
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',
@@ -40,6 +44,10 @@ const config: Config = {
         destructive: {
           DEFAULT: 'hsl(var(--destructive))',
           foreground: 'hsl(var(--destructive-foreground))',
+        },
+        success: {
+          DEFAULT: 'hsl(var(--success))',
+          foreground: 'hsl(var(--success-foreground))',
         },
         border: 'hsl(var(--border))',
         input: 'hsl(var(--input))',

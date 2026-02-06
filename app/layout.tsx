@@ -1,25 +1,26 @@
-import type { Metadata } from 'next'
-import { Geist, Geist_Mono } from 'next/font/google'
+import React from "react"
+import type { Metadata } from "next";
+import { Lora, Inter } from "next/font/google";
 
-import './globals.css'
+import "./globals.css";
 
-const _geist = Geist({ subsets: ['latin'] })
-const _geistMono = Geist_Mono({ subsets: ['latin'] })
+const _lora = Lora({ subsets: ["latin"], variable: "--font-serif" });
+const _inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 
 export const metadata: Metadata = {
-  title: 'v0 App',
-  description: 'Created with v0',
-  generator: 'v0.app',
-}
+  title: "El Diccionario - Juego Multijugador",
+  description:
+    "Inventa definiciones, engana a tus amigos y adivina la verdadera. El clasico juego del diccionario, ahora online.",
+};
 
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode
+  children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className="font-sans antialiased">{children}</body>
+    <html lang="es">
+      <body className="font-sans antialiased min-h-screen">{children}</body>
     </html>
-  )
+  );
 }

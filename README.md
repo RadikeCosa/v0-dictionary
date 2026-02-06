@@ -7,7 +7,7 @@ Un juego multijugador en línea donde los jugadores ponen a prueba su creativida
 1. **Crear o unirse a una sala**: El anfitrión crea una sala y comparte el código con otros jugadores
 2. **Fase de escritura**: Cada ronda, se presenta una palabra poco común. Todos los jugadores escriben una definición falsa pero convincente
 3. **Fase de votación**: Los jugadores leen todas las definiciones (incluyendo la real) y votan por la que creen es correcta
-4. **Puntuación**: 
+4. **Puntuación**:
    - Ganas puntos si otros jugadores votan por tu definición falsa
    - Ganas puntos si adivinas la definición correcta
 5. **Ganador**: Al final de todas las rondas, gana el jugador con más puntos
@@ -40,12 +40,14 @@ Un juego multijugador en línea donde los jugadores ponen a prueba su creativida
 ## 🚀 Instalación
 
 1. **Clona el repositorio**:
+
 ```bash
 git clone <url-del-repositorio>
 cd v0-dictionary
 ```
 
 2. **Instala las dependencias**:
+
 ```bash
 pnpm install
 ```
@@ -59,6 +61,7 @@ DATABASE_URL=tu_url_de_neon_aqui
 ```
 
 Para obtener tu `DATABASE_URL`:
+
 - Crea una cuenta en [Neon](https://neon.tech/)
 - Crea un nuevo proyecto
 - Copia la cadena de conexión (connection string)
@@ -74,6 +77,7 @@ pnpm tsx scripts/setup-database.ts
 ```
 
 El script creará las siguientes tablas:
+
 - `rooms`: Salas de juego
 - `players`: Jugadores
 - `rounds`: Rondas de cada partida
@@ -83,12 +87,13 @@ El script creará las siguientes tablas:
 ## 🎯 Uso
 
 1. **Inicia el servidor de desarrollo**:
+
 ```bash
 pnpm dev
 ```
 
 2. **Abre el navegador**:
-Visita [http://localhost:3000](http://localhost:3000)
+   Visita [http://localhost:3000](http://localhost:3000)
 
 3. **Crear una sala**:
    - Ingresa tu nombre
@@ -138,13 +143,16 @@ v0-dictionary/
 ## 🎲 API Endpoints
 
 ### Salas
+
 - `POST /api/rooms` - Crear una nueva sala
 - `GET /api/rooms/[roomId]/state` - Obtener el estado de una sala
 
 ### Jugadores
+
 - `POST /api/rooms/[roomId]/join` - Unirse a una sala
 
 ### Juego
+
 - `POST /api/rooms/[roomId]/start-round` - Iniciar una nueva ronda
 - `POST /api/rooms/[roomId]/definition` - Enviar definición
 - `POST /api/rooms/[roomId]/vote` - Votar por una definición
@@ -159,7 +167,7 @@ Edita el archivo [lib/words.ts](lib/words.ts) para añadir más palabras y sus d
 export const words = [
   {
     word: "palabra",
-    definition: "definición real"
+    definition: "definición real",
   },
   // Añade más aquí...
 ];

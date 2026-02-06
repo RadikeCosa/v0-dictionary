@@ -55,6 +55,37 @@ export function WritingPhase({
       onRefresh();
     } catch (err) {
       setError(err instanceof Error ? err.message : "Error al guardar");
+      {
+        /* Admin skip word button */
+      }
+      {
+        room.admin_id === playerId && readyCount === 0 && (
+          <Button
+            variant="destructive"
+            className="mt-4"
+            onClick={async () => {
+              setError("");
+              try {
+                const res = await fetch(`/api/rooms/${roomId}/skip-word`, {
+                  method: "POST",
+                });
+                const data = await res.json();
+                if (!res.ok) throw new Error(data.error);
+                onRefresh();
+              } catch (err) {
+                setError(
+                  err instanceof Error
+                    ? err.message
+                    : "Error al saltar palabra",
+                );
+              }
+            }}
+            disabled={saving || readying}
+          >
+            Saltar palabra
+          </Button>
+        );
+      }
     } finally {
       setSaving(false);
     }
@@ -107,7 +138,10 @@ export function WritingPhase({
           </div>
           <Textarea
             value={text}
-            onChange={(e) => { setText(e.target.value); setSaved(false); }}
+            onChange={(e) => {
+              setText(e.target.value);
+              setSaved(false);
+            }}
             placeholder="Escribe una definicion convincente..."
             rows={3}
             maxLength={300}

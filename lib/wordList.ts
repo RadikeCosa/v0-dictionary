@@ -1,95 +1,123 @@
 // Curated list of unusual/obscure Spanish words for the game
 // Each word has a fallback definition in case the dictionary API fails
 export const WORDS: { word: string; fallback: string }[] = [
+  { word: "acendrado", fallback: "Puro, sin mancha ni corrupción." },
+  { word: "aliquebrado", fallback: "Débil, quebrantado física o moralmente." },
   {
-    word: "petricor",
-    fallback: "Olor que produce la lluvia al caer sobre la tierra seca.",
+    word: "ataraxia",
+    fallback: "Imperturbabilidad del ánimo; serenidad absoluta.",
   },
-  { word: "acendrado", fallback: "Puro, sin mancha ni defecto." },
-  { word: "efugio", fallback: "Evasiva, recurso para eludir una dificultad." },
-  { word: "zangolotino", fallback: "Muchacho que pretende pasar por nino." },
-  { word: "crasitud", fallback: "Gordura, grosura." },
-  { word: "orate", fallback: "Persona que ha perdido el juicio." },
   {
     word: "baladron",
-    fallback: "Fanfarron que presume de valiente sin serlo.",
+    fallback: "Fanfarrón que presume de valentía que no tiene.",
   },
-  { word: "flocadura", fallback: "Guarnicion hecha de flecos." },
-  { word: "garambaina", fallback: "Adorno de mal gusto o cosa superflua." },
+  { word: "balduque", fallback: "Cinta estrecha usada para atar o adornar." },
   {
-    word: "hacanea",
-    fallback: "Jaca o caballo de tamano mediano y paso suave.",
+    word: "clinamen",
+    fallback: "Desviación mínima e imprevisible que altera un curso previsto.",
   },
-  { word: "ignavia", fallback: "Pereza, flojedad, desidia." },
-  { word: "jocundo", fallback: "Alegre, festivo, apacible." },
+  { word: "corambre", fallback: "Conjunto de cueros preparados para su uso." },
   {
-    word: "libripens",
-    fallback:
-      "En el derecho romano, el que sostenia la balanza en ciertos actos.",
-  },
-  {
-    word: "mohatra",
-    fallback: "Compra fingida o venta simulada que se hace con engano.",
-  },
-  {
-    word: "nefelibata",
-    fallback: "Soñador que no se apercibe de la realidad.",
-  },
-  { word: "opimo", fallback: "Rico, fertil, abundante." },
-  { word: "pergeño", fallback: "Traza, disposicion o apariencia exterior." },
-  { word: "regoldar", fallback: "Eructar." },
-  { word: "sesteadero", fallback: "Lugar donde sestea el ganado." },
-  {
-    word: "tantaleo",
-    fallback: "Relativo a Tantalo, que padece un suplicio semejante al suyo.",
-  },
-  {
-    word: "ubiquo",
-    fallback: "Que esta presente a un mismo tiempo en todas partes.",
-  },
-  { word: "venatorio", fallback: "Perteneciente o relativo a la caza." },
-  { word: "zahurda", fallback: "Pocilga, lugar muy sucio." },
-  { word: "aliquebrado", fallback: "Caido de alas, decaido de animo." },
-  { word: "buciofalo", fallback: "Hombre necio, bobo." },
-  {
-    word: "corambre",
-    fallback: "Conjunto de cueros o pellejos curtidos o sin curtir.",
+    word: "crasitud",
+    fallback: "Espesura o densidad excesiva; tosquedad intelectual.",
   },
   {
     word: "dendrologia",
-    fallback: "Parte de la botanica que trata de los arboles.",
+    fallback: "Rama de la botánica que estudia los árboles.",
   },
-  { word: "ergotismo", fallback: "Abuso del silogismo o de la argumentacion." },
+  { word: "desideratum", fallback: "Cosa muy deseada o considerada ideal." },
+  {
+    word: "efugio",
+    fallback: "Salida o recurso para escapar de una dificultad.",
+  },
+  {
+    word: "epigono",
+    fallback: "Persona que imita a otra sin aportar originalidad.",
+  },
+  {
+    word: "ergotismo",
+    fallback:
+      "Intoxicación causada por el consumo de cereales contaminados con cornezuelo.",
+  },
   {
     word: "filacteria",
-    fallback: "Tira de pergamino con pasajes de la Escritura.",
+    fallback: "Objeto al que se atribuyen poderes protectores o mágicos.",
   },
   {
-    word: "galimatias",
-    fallback:
-      "Lenguaje oscuro por la impropiedad de la frase o por la confusion de las ideas.",
+    word: "flocadura",
+    fallback: "Conjunto de hilos o fibras sueltas que adornan una prenda.",
   },
-  { word: "hermeneutica", fallback: "Arte de interpretar textos." },
+  { word: "fulgurar", fallback: "Brillar intensamente de manera súbita." },
+  { word: "galimatias", fallback: "Lenguaje oscuro, confuso o sin sentido." },
+  { word: "garambaina", fallback: "Cosa de poca importancia o sin valor." },
+  {
+    word: "hacanea",
+    fallback: "Caballo pequeño y resistente, usado para paseo.",
+  },
+  {
+    word: "hermeneutica",
+    fallback:
+      "Disciplina que interpreta textos, especialmente filosóficos o sagrados.",
+  },
   {
     word: "idiosincrasia",
     fallback:
-      "Rasgos y caracter propios y distintivos de un individuo o una colectividad.",
+      "Rasgos característicos del temperamento o carácter de una persona o grupo.",
   },
+  { word: "ignavia", fallback: "Cobardía o falta de valor." },
+  { word: "jergon", fallback: "Colchón pobre y delgado." },
+  { word: "jocundo", fallback: "Alegre, festivo, placentero." },
+  { word: "laceria", fallback: "Adorno formado por lazos o entrelazados." },
   {
-    word: "jergon",
-    fallback: "Colchon de paja, esparto o hierbas sin bastas.",
-  },
-  {
-    word: "laceria",
-    fallback: "Conjunto de lazos, especialmente como adorno arquitectonico.",
+    word: "libripens",
+    fallback: "Persona que piensa libremente, sin someterse a dogmas.",
   },
   {
     word: "melifluo",
-    fallback: "Que tiene miel o es parecido a ella en sus propiedades.",
+    fallback: "Dulce, suave o excesivamente adulador en el modo de hablar.",
   },
   {
-    word: "nubil",
-    fallback: "Dicho de una persona, en edad de contraer matrimonio.",
+    word: "mohatra",
+    fallback: "Contrato fingido para encubrir un préstamo usurario.",
   },
-  { word: "obnubilar", fallback: "Ofuscar, obscurecer la razon." },
+  { word: "nefelibata", fallback: "Persona soñadora, ajena a la realidad." },
+  {
+    word: "nubil",
+    fallback: "Que ha alcanzado la madurez para contraer matrimonio.",
+  },
+  {
+    word: "numinoso",
+    fallback: "Que provoca una sensación de misterio o sobrecogimiento.",
+  },
+  {
+    word: "obnubilar",
+    fallback: "Oscurecer o confundir la razón o el entendimiento.",
+  },
+  { word: "opimo", fallback: "Abundante, fértil o muy provechoso." },
+  { word: "pergeno", fallback: "Disposición o traza inicial de algo." },
+  {
+    word: "petricor",
+    fallback: "Olor agradable que produce la lluvia al caer sobre suelo seco.",
+  },
+  { word: "prolijo", fallback: "Cuidadoso, ordenado y atento a los detalles." },
+  { word: "regoldar", fallback: "Eructar ruidosamente." },
+  {
+    word: "sesteadero",
+    fallback: "Lugar donde el ganado se recoge para descansar.",
+  },
+  {
+    word: "sesquipedal",
+    fallback: "Excesivamente largo o rebuscado, especialmente en el lenguaje.",
+  },
+  {
+    word: "tantaleo",
+    fallback: "Acción de provocar un deseo que no puede satisfacerse.",
+  },
+  {
+    word: "ubiquo",
+    fallback: "Que está presente en todas partes al mismo tiempo.",
+  },
+  { word: "venatorio", fallback: "Relativo a la caza." },
+  { word: "vetusto", fallback: "Muy antiguo y deteriorado por el tiempo." },
+  { word: "zahurda", fallback: "Lugar sucio y despreciable." },
 ];

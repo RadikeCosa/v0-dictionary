@@ -152,13 +152,8 @@ export function WritingPhase({
               {readying ? "Enviando..." : "Listo"}
             </Button>
           </div>
-          {isAdmin && readyCount === 0 && (
-            <Button
-              variant="destructive"
-              className="mt-4"
-              onClick={skipWord}
-              disabled={saving || readying}
-            >
+          {isAdmin && readyCount === 0 && !isReady && (
+            <Button variant="outline" onClick={skipWord} className="mt-4">
               Saltar palabra
             </Button>
           )}

@@ -1,6 +1,5 @@
 "use client";
 
-import { useState, useMemo } from "react";
 import { Vote, Check, Clock } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import type {
@@ -41,12 +40,7 @@ export function VotingPhase({
   const voteCount = votes.length;
 
   // Mezclar definiciones + real de forma aleatoria y estable por ronda
-  const [allOptions, setAllOptions] = useState<
-    { id: number | "real"; text: string; isReal: boolean }[]
-  >([]);
-
-  // Generar opciones solo cuando cambia la ronda
-  useEffect(() => {
+  const allOptions = useMemo(() => {
     const opts: { id: number | "real"; text: string; isReal: boolean }[] = [
       ...definitions
         .filter((d) => d.player_id !== playerId)
@@ -62,8 +56,8 @@ export function VotingPhase({
       const j = Math.floor(Math.random() * (i + 1));
       [opts[i], opts[j]] = [opts[j], opts[i]];
     }
-    setAllOptions(opts);
-  }, [currentRound.id]);
+    return opts;
+  }, [currentRound.id, definitions, playerId]);
 
   async function submitVote() {
     if (selectedId === null) return;

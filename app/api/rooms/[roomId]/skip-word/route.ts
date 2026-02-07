@@ -8,44 +8,43 @@ export async function POST(
   { params }: { params: { roomId: string } },
 ) {
   const roomId = params.roomId;
-  // Get current round
+  // Obtener la ronda actual
   const [round] = (
     await sql`SELECT * FROM rounds WHERE room_id = ${roomId} ORDER BY id DESC LIMIT 1`
   ).rows;
   if (!round)
     return NextResponse.json({ error: "No round found" }, { status: 404 });
 
-  // Get all definitions for this round
+  // Obtener definiciones de la ronda
   const defs = (
     await sql`SELECT * FROM definitions WHERE round_id = ${round.id}`
   ).rows;
-  // Check if any player is ready
-  const anyReady = defs.some((d) => d.ready);
+  // Validar que ningún jugador esté listo
+  const anyReady = defs.some((d) => d.is_ready);
   if (anyReady)
     return NextResponse.json(
       { error: "Players already ready" },
       { status: 400 },
     );
 
-  // Get used words
+  // Obtener palabras usadas
   const usedRounds = (
     await sql`SELECT word FROM rounds WHERE room_id = ${roomId}`
   ).rows;
   const usedWords = usedRounds.map((r) => r.word);
-
-  // Add current word to used list
+  // Agregar la palabra actual si no está
   if (!usedWords.includes(round.word)) usedWords.push(round.word);
 
-  // Get new random word
-  const newWord = getRandomWord(usedWords);
-  if (!newWord)
+  // Usar getRandomWord para obtener una nueva palabra
+  const wordEntry = getRandomWord(usedWords);
+  if (!wordEntry)
     return NextResponse.json(
-      { error: "No unused words left" },
+      { error: "No quedan palabras disponibles" },
       { status: 400 },
     );
 
-  // Update round with new word
-  await sql`UPDATE rounds SET word = ${newWord}, real_definition = NULL WHERE id = ${round.id}`;
+  // Actualizar la ronda con la nueva palabra y resetear real_definition
+  await sql`UPDATE rounds SET word = ${wordEntry.word}, real_definition = NULL WHERE id = ${round.id}`;
 
-  return NextResponse.json({ success: true, word: newWord });
+  return NextResponse.json({ success: true, word: wordEntry.word });
 }

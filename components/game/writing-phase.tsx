@@ -55,39 +55,21 @@ export function WritingPhase({
       onRefresh();
     } catch (err) {
       setError(err instanceof Error ? err.message : "Error al guardar");
-      {
-        /* Admin skip word button */
-      }
-      {
-        room.admin_id === playerId && readyCount === 0 && (
-          <Button
-            variant="destructive"
-            className="mt-4"
-            onClick={async () => {
-              setError("");
-              try {
-                const res = await fetch(`/api/rooms/${roomId}/skip-word`, {
-                  method: "POST",
-                });
-                const data = await res.json();
-                if (!res.ok) throw new Error(data.error);
-                onRefresh();
-              } catch (err) {
-                setError(
-                  err instanceof Error
-                    ? err.message
-                    : "Error al saltar palabra",
-                );
-              }
-            }}
-            disabled={saving || readying}
-          >
-            Saltar palabra
-          </Button>
-        );
-      }
     } finally {
       setSaving(false);
+    }
+  }
+  async function skipWord() {
+    setError("");
+    try {
+      const res = await fetch(`/api/rooms/${roomId}/skip-word`, {
+        method: "POST",
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error);
+      onRefresh();
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Error al saltar palabra");
     }
   }
 
@@ -169,6 +151,16 @@ export function WritingPhase({
               {readying ? "Enviando..." : "Listo"}
             </Button>
           </div>
+          {room.admin_id === playerId && readyCount === 0 && (
+            <Button
+              variant="destructive"
+              className="mt-4"
+              onClick={skipWord}
+              disabled={saving || readying}
+            >
+              Saltar palabra
+            </Button>
+          )}
         </div>
       ) : (
         <div className="w-full bg-card border border-success rounded-xl p-5 flex flex-col items-center gap-3">

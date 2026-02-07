@@ -40,8 +40,13 @@ export function VotingPhase({
   const hasVoted = votes.some((v) => v.voter_id === playerId);
   const voteCount = votes.length;
 
-  // Mezclar definiciones + real de forma aleatoria
-  const allOptions = useMemo(() => {
+  // Mezclar definiciones + real de forma aleatoria y estable por ronda
+  const [allOptions, setAllOptions] = useState<
+    { id: number | "real"; text: string; isReal: boolean }[]
+  >([]);
+
+  // Generar opciones solo cuando cambia la ronda
+  useEffect(() => {
     const opts: { id: number | "real"; text: string; isReal: boolean }[] = [
       ...definitions
         .filter((d) => d.player_id !== playerId)
@@ -57,8 +62,8 @@ export function VotingPhase({
       const j = Math.floor(Math.random() * (i + 1));
       [opts[i], opts[j]] = [opts[j], opts[i]];
     }
-    return opts;
-  }, [definitions, currentRound, playerId]);
+    setAllOptions(opts);
+  }, [currentRound.id]);
 
   async function submitVote() {
     if (selectedId === null) return;

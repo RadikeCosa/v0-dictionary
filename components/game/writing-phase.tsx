@@ -35,6 +35,7 @@ export function WritingPhase({
   const isReady = myDefinition?.is_ready ?? false;
 
   const readyCount = definitions.filter((d) => d.is_ready).length;
+  const isAdmin = players.find((p) => p.id === playerId)?.is_host;
 
   async function saveDefinition() {
     if (!text.trim()) {
@@ -151,7 +152,7 @@ export function WritingPhase({
               {readying ? "Enviando..." : "Listo"}
             </Button>
           </div>
-          {room.admin_id === playerId && readyCount === 0 && (
+          {isAdmin && readyCount === 0 && (
             <Button
               variant="destructive"
               className="mt-4"

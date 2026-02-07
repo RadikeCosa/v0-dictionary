@@ -3,7 +3,13 @@
 import { useState, useMemo } from "react";
 import { Vote, Check, Clock } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import type { Room, Round, Player, Definition, Vote as VoteType } from "@/lib/types";
+import type {
+  Room,
+  Round,
+  Player,
+  Definition,
+  Vote as VoteType,
+} from "@/lib/types";
 import { RoundHeader } from "./round-header";
 
 interface VotingPhaseProps {
@@ -34,20 +40,24 @@ export function VotingPhase({
   const hasVoted = votes.some((v) => v.voter_id === playerId);
   const voteCount = votes.length;
 
-  // Shuffle definitions + real, but keep it stable
+  // Mezclar definiciones + real de forma aleatoria
   const allOptions = useMemo(() => {
     const opts: { id: number | "real"; text: string; isReal: boolean }[] = [
       ...definitions
-        .filter((d) => d.player_id !== playerId) // Can't see your own in the list to vote
-        .map((d) => ({ id: d.id as number | "real", text: d.definition, isReal: false })),
+        .filter((d) => d.player_id !== playerId)
+        .map((d) => ({
+          id: d.id as number | "real",
+          text: d.definition,
+          isReal: false,
+        })),
       { id: "real" as const, text: currentRound.real_definition, isReal: true },
     ];
-    // Deterministic shuffle based on round id
-    return opts.sort((a, b) => {
-      const hashA = typeof a.id === "number" ? a.id * 7 : currentRound.id * 13;
-      const hashB = typeof b.id === "number" ? b.id * 7 : currentRound.id * 13;
-      return hashA - hashB;
-    });
+    // Fisher-Yates shuffle
+    for (let i = opts.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [opts[i], opts[j]] = [opts[j], opts[i]];
+    }
+    return opts;
   }, [definitions, currentRound, playerId]);
 
   async function submitVote() {
@@ -93,7 +103,9 @@ export function VotingPhase({
       <div className="w-full flex items-center gap-2">
         <Vote className="w-4 h-4 text-primary" />
         <p className="text-sm font-medium text-foreground">
-          {hasVoted ? "Ya votaste. Esperando al resto..." : "Vota la definicion que creas verdadera"}
+          {hasVoted
+            ? "Ya votaste. Esperando al resto..."
+            : "Vota la definicion que creas verdadera"}
         </p>
       </div>
 
@@ -126,7 +138,9 @@ export function VotingPhase({
                 >
                   {letter}
                 </span>
-                <p className="text-sm leading-relaxed text-card-foreground">{option.text}</p>
+                <p className="text-sm leading-relaxed text-card-foreground">
+                  {option.text}
+                </p>
               </div>
             </button>
           );

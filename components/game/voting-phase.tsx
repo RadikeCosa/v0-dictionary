@@ -12,6 +12,20 @@ import type {
 } from "@/lib/types";
 import { RoundHeader } from "./round-header";
 
+// Seeded PRNG for stable shuffling across remounts
+function seededRandom(seed: string) {
+  let hash = 0;
+  for (let i = 0; i < seed.length; i++) {
+    hash = (hash << 5) - hash + seed.charCodeAt(i);
+    hash = hash | 0; // Convert to 32-bit integer
+  }
+  return function () {
+    // Linear Congruential Generator with better parameters
+    hash = (hash * 1664525 + 1013904223) | 0;
+    return (hash >>> 0) / 4294967296;
+  };
+}
+
 interface VotingPhaseProps {
   room: Room;
   currentRound: Round;
@@ -42,20 +56,6 @@ export function VotingPhase({
 
   // Mezclar definiciones + real de forma aleatoria y estable por ronda
   const allOptions = useMemo(() => {
-    // Seeded PRNG for stable shuffling across remounts
-    function seededRandom(seed: string) {
-      let hash = 0;
-      for (let i = 0; i < seed.length; i++) {
-        hash = (hash << 5) - hash + seed.charCodeAt(i);
-        hash = hash | 0; // Convert to 32-bit integer
-      }
-      return function () {
-        // Linear Congruential Generator with better parameters
-        hash = (hash * 1664525 + 1013904223) | 0;
-        return (hash >>> 0) / 4294967296;
-      };
-    }
-
     const opts: { id: number | "real"; text: string; isReal: boolean }[] = [
       ...definitions
         .filter((d) => d.player_id !== playerId)

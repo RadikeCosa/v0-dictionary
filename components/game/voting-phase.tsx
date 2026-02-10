@@ -42,6 +42,19 @@ export function VotingPhase({
 
   // Mezclar definiciones + real de forma aleatoria y estable por ronda
   const allOptions = useMemo(() => {
+    // Seeded PRNG for stable shuffling across remounts
+    function seededRandom(seed: string) {
+      let hash = 0;
+      for (let i = 0; i < seed.length; i++) {
+        hash = (hash << 5) - hash + seed.charCodeAt(i);
+        hash = hash & hash;
+      }
+      return function () {
+        hash = (hash * 9301 + 49297) % 233280;
+        return hash / 233280;
+      };
+    }
+
     const opts: { id: number | "real"; text: string; isReal: boolean }[] = [
       ...definitions
         .filter((d) => d.player_id !== playerId)
@@ -52,9 +65,11 @@ export function VotingPhase({
         })),
       { id: "real" as const, text: currentRound.real_definition, isReal: true },
     ];
-    // Fisher-Yates shuffle
+    
+    // Fisher-Yates shuffle with seeded random
+    const rng = seededRandom(`${currentRound.id}-${playerId}`);
     for (let i = opts.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
+      const j = Math.floor(rng() * (i + 1));
       [opts[i], opts[j]] = [opts[j], opts[i]];
     }
     return opts;

@@ -12,6 +12,20 @@ import type {
 } from "@/lib/types";
 import { RoundHeader } from "./round-header";
 
+// Seeded PRNG for stable shuffling across remounts
+function seededRandom(seed: string) {
+  let hash = 0;
+  for (let i = 0; i < seed.length; i++) {
+    hash = (hash << 5) - hash + seed.charCodeAt(i);
+    hash = hash | 0; // Convert to 32-bit integer
+  }
+  return function () {
+    // Linear Congruential Generator with better parameters
+    hash = (hash * 1664525 + 1013904223) | 0;
+    return (hash >>> 0) / 4294967296;
+  };
+}
+
 interface VotingPhaseProps {
   room: Room;
   currentRound: Round;
@@ -52,9 +66,11 @@ export function VotingPhase({
         })),
       { id: "real" as const, text: currentRound.real_definition, isReal: true },
     ];
-    // Fisher-Yates shuffle
+    
+    // Fisher-Yates shuffle with seeded random
+    const rng = seededRandom(`${currentRound.id}-${playerId}`);
     for (let i = opts.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
+      const j = Math.floor(rng() * (i + 1));
       [opts[i], opts[j]] = [opts[j], opts[i]];
     }
     return opts;

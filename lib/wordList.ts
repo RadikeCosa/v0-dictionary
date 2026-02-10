@@ -1,16 +1,11 @@
 // Curated list of unusual/obscure Spanish words for the game
 // Each word has a fallback definition in case the dictionary API fails
 export const WORDS: { word: string; fallback: string }[] = [
-  { word: "acendrado", fallback: "Puro, sin mancha ni corrupción." },
-  { word: "aliquebrado", fallback: "Débil, quebrantado física o moralmente." },
   {
     word: "ataraxia",
     fallback: "Imperturbabilidad del ánimo; serenidad absoluta.",
   },
-  {
-    word: "baladron",
-    fallback: "Fanfarrón que presume de valentía que no tiene.",
-  },
+
   { word: "balduque", fallback: "Cinta estrecha usada para atar o adornar." },
   {
     word: "clinamen",
@@ -20,10 +15,6 @@ export const WORDS: { word: string; fallback: string }[] = [
   {
     word: "crasitud",
     fallback: "Espesura o densidad excesiva; tosquedad intelectual.",
-  },
-  {
-    word: "dendrologia",
-    fallback: "Rama de la botánica que estudia los árboles.",
   },
   { word: "desideratum", fallback: "Cosa muy deseada o considerada ideal." },
   {
@@ -35,39 +26,11 @@ export const WORDS: { word: string; fallback: string }[] = [
     fallback: "Persona que imita a otra sin aportar originalidad.",
   },
   {
-    word: "ergotismo",
-    fallback:
-      "Intoxicación causada por el consumo de cereales contaminados con cornezuelo.",
-  },
-  {
-    word: "filacteria",
-    fallback: "Objeto al que se atribuyen poderes protectores o mágicos.",
-  },
-  {
     word: "flocadura",
     fallback: "Conjunto de hilos o fibras sueltas que adornan una prenda.",
   },
   { word: "fulgurar", fallback: "Brillar intensamente de manera súbita." },
   { word: "galimatias", fallback: "Lenguaje oscuro, confuso o sin sentido." },
-  { word: "garambaina", fallback: "Cosa de poca importancia o sin valor." },
-  {
-    word: "hacanea",
-    fallback: "Caballo pequeño y resistente, usado para paseo.",
-  },
-  {
-    word: "hermeneutica",
-    fallback:
-      "Disciplina que interpreta textos, especialmente filosóficos o sagrados.",
-  },
-  {
-    word: "idiosincrasia",
-    fallback:
-      "Rasgos característicos del temperamento o carácter de una persona o grupo.",
-  },
-  { word: "ignavia", fallback: "Cobardía o falta de valor." },
-  { word: "jergon", fallback: "Colchón pobre y delgado." },
-  { word: "jocundo", fallback: "Alegre, festivo, placentero." },
-  { word: "laceria", fallback: "Adorno formado por lazos o entrelazados." },
   {
     word: "libripens",
     fallback: "Persona que piensa libremente, sin someterse a dogmas.",
@@ -76,48 +39,108 @@ export const WORDS: { word: string; fallback: string }[] = [
     word: "melifluo",
     fallback: "Dulce, suave o excesivamente adulador en el modo de hablar.",
   },
+  // Palabras poco usadas agregadas
   {
-    word: "mohatra",
-    fallback: "Contrato fingido para encubrir un préstamo usurario.",
+    word: "abulia",
+    fallback: "Falta de voluntad o disminución notable de su energía.",
   },
-  { word: "nefelibata", fallback: "Persona soñadora, ajena a la realidad." },
+  { word: "acerbo", fallback: "Áspero al gusto, cruel, riguroso." },
   {
-    word: "nubil",
-    fallback: "Que ha alcanzado la madurez para contraer matrimonio.",
+    word: "anacoluto",
+    fallback: "Ruptura en la secuencia lógica de una frase.",
+  },
+  {
+    word: "cenobita",
+    fallback: "Monje que vive en comunidad, en contraposición al ermitaño.",
+  },
+  { word: "ignoto", fallback: "Desconocido, no sabido o ignorado." },
+  { word: "orbe", fallback: "Mundo, esfera terrestre." },
+  {
+    word: "pusilánime",
+    fallback: "Falto de ánimo y valor para afrontar las dificultades.",
+  },
+  { word: "recóndito", fallback: "Muy escondido, reservado u oculto." },
+  {
+    word: "zaino",
+    fallback: "Falso, traidor, que encubre su intención o sentimiento.",
+  },
+  {
+    word: "alfeizar",
+    fallback: "Parte inferior y saliente del vano de una puerta o ventana.",
+  },
+  { word: "bisoño", fallback: "Novato, inexperto en un oficio o arte." },
+  { word: "cicatero", fallback: "Tacaño, que escatima lo que da o gasta." },
+  {
+    word: "díscolo",
+    fallback: "Desobediente, que no se comporta con docilidad.",
+  },
+  {
+    word: "escolio",
+    fallback: "Nota aclaratoria que se pone al margen de un texto.",
+  },
+  { word: "felón", fallback: "Que comete traición o falta grave." },
+  {
+    word: "gálibo",
+    fallback: "Altura máxima permitida para el paso de vehículos o trenes.",
+  },
+  {
+    word: "histrión",
+    fallback: "Actor teatral, especialmente el que actúa de manera exagerada.",
+  },
+  { word: "inmarcesible", fallback: "Que no puede marchitarse." },
+  { word: "lánguido", fallback: "Falto de fuerza, vigor o lozanía." },
+  {
+    word: "miasma",
+    fallback:
+      "Efluvio maligno que, según se creía, desprendían cuerpos en descomposición.",
   },
   {
     word: "numinoso",
     fallback: "Que provoca una sensación de misterio o sobrecogimiento.",
   },
-  {
-    word: "obnubilar",
-    fallback: "Oscurecer o confundir la razón o el entendimiento.",
-  },
-  { word: "opimo", fallback: "Abundante, fértil o muy provechoso." },
   { word: "pergeno", fallback: "Disposición o traza inicial de algo." },
-  {
-    word: "petricor",
-    fallback: "Olor agradable que produce la lluvia al caer sobre suelo seco.",
-  },
-  { word: "prolijo", fallback: "Cuidadoso, ordenado y atento a los detalles." },
-  { word: "regoldar", fallback: "Eructar ruidosamente." },
-  {
-    word: "sesteadero",
-    fallback: "Lugar donde el ganado se recoge para descansar.",
-  },
-  {
-    word: "sesquipedal",
-    fallback: "Excesivamente largo o rebuscado, especialmente en el lenguaje.",
-  },
   {
     word: "tantaleo",
     fallback: "Acción de provocar un deseo que no puede satisfacerse.",
   },
+  // Más palabras poco usadas
+  { word: "abúlico", fallback: "Que padece abulia o falta de voluntad." },
+  { word: "acendrado", fallback: "Puro, sin mancha ni defecto." },
+  { word: "alfeñique", fallback: "Persona débil y de complexión delicada." },
   {
-    word: "ubiquo",
-    fallback: "Que está presente en todas partes al mismo tiempo.",
+    word: "antinomia",
+    fallback: "Contradicción entre dos leyes o principios.",
   },
-  { word: "venatorio", fallback: "Relativo a la caza." },
-  { word: "vetusto", fallback: "Muy antiguo y deteriorado por el tiempo." },
-  { word: "zahurda", fallback: "Lugar sucio y despreciable." },
+  {
+    word: "apócope",
+    fallback: "Supresión de algún sonido al final de una palabra.",
+  },
+  {
+    word: "arquetipo",
+    fallback: "Modelo original y primario en un arte u otra disciplina.",
+  },
+  {
+    word: "ataraxia",
+    fallback: "Imperturbabilidad del ánimo; serenidad absoluta.",
+  },
+  { word: "baldío", fallback: "Terreno que no se cultiva ni se labra." },
+  { word: "bizarro", fallback: "Valiente, esforzado, generoso." },
+  { word: "cuita", fallback: "Trabajo, aflicción o desventura." },
+  { word: "deleznable", fallback: "Despreciable, de poco valor o duración." },
+  { word: "enhiesto", fallback: "Levantado, derecho." },
+  {
+    word: "escolástico",
+    fallback:
+      "Perteneciente o relativo a las escuelas medievales o a sus doctrinas.",
+  },
+  { word: "estólido", fallback: "Necio, tonto, falto de razón." },
+  { word: "exangüe", fallback: "Falto de sangre o de fuerzas." },
+  { word: "hastío", fallback: "Disgusto, tedio, fastidio." },
+  {
+    word: "inexorable",
+    fallback: "Que no se puede evitar, detener o cambiar.",
+  },
+  { word: "lóbrego", fallback: "Oscuro, tenebroso, triste." },
+  { word: "perentorio", fallback: "Decisivo, concluyente, urgente." },
+  { word: "protervo", fallback: "Perverso, obstinado en la maldad." },
 ];

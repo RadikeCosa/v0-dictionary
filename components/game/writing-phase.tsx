@@ -30,6 +30,7 @@ export function WritingPhase({
   const [text, setText] = useState(myDefinition?.definition ?? "");
   const [saving, setSaving] = useState(false);
   const [readying, setReadying] = useState(false);
+  const [skipping, setSkipping] = useState(false); // Add a skipping state
   const [error, setError] = useState("");
   const [saved, setSaved] = useState(!!myDefinition);
   const isReady = myDefinition?.is_ready ?? false;
@@ -61,6 +62,8 @@ export function WritingPhase({
     }
   }
   async function skipWord() {
+    if (skipping) return; // Prevent double-click
+    setSkipping(true);
     setError("");
     try {
       const res = await fetch(`/api/rooms/${roomId}/skip-word`, {
@@ -69,17 +72,11 @@ export function WritingPhase({
       const data = await res.json();
       console.log("Respuesta skip-word:", data);
       if (!res.ok) throw new Error(data.error);
-      // Verificar si la palabra realmente cambió
-      setTimeout(() => {
-        if (currentRound.word === data.word) {
-          setError(
-            "La palabra no cambió. Intenta de nuevo o revisa el backend.",
-          );
-        }
-      }, 1000);
       onRefresh();
     } catch (err) {
       setError(err instanceof Error ? err.message : "Error al saltar palabra");
+    } finally {
+      setSkipping(false);
     }
   }
 
@@ -162,8 +159,13 @@ export function WritingPhase({
             </Button>
           </div>
           {isAdmin && readyCount === 0 && !isReady && (
-            <Button variant="outline" onClick={skipWord} className="mt-4">
-              Saltar palabra
+            <Button
+              variant="outline"
+              onClick={skipWord}
+              disabled={skipping}
+              className="mt-4"
+            >
+              {skipping ? "Saltando..." : "Saltar palabra"}
             </Button>
           )}
         </div>

@@ -2,6 +2,28 @@ import { NextResponse } from "next/server";
 import { sql } from "@/lib/db";
 import { getRandomWord } from "@/lib/words";
 
+async function fetchDefinition(
+  word: string,
+  fallback: string,
+): Promise<string> {
+  try {
+    const response = await fetch(
+      `https://api.dictionaryapi.dev/api/v2/entries/es/${encodeURIComponent(word)}`,
+      { signal: AbortSignal.timeout(5000) },
+    );
+    if (response.ok) {
+      const data = await response.json();
+      const meaning = data?.[0]?.meanings?.[0]?.definitions?.[0]?.definition;
+      if (meaning && typeof meaning === "string" && meaning.length > 5) {
+        return meaning;
+      }
+    }
+  } catch {
+    // Use fallback
+  }
+  return fallback;
+}
+
 export async function POST(
   request: Request,
   { params }: { params: Promise<{ roomId: string }> },
@@ -44,8 +66,14 @@ export async function POST(
         { status: 400 },
       );
 
-    // Actualizar la ronda con la nueva palabra y resetear real_definition
-    await sql`UPDATE rounds SET word = ${wordEntry.word}, real_definition = NULL WHERE id = ${round.id}`;
+    // Fetch the real definition for the new word (like start-round does)
+    const realDefinition = await fetchDefinition(
+      wordEntry.word,
+      wordEntry.fallback,
+    );
+
+    // Actualizar la ronda con la nueva palabra Y la nueva definición real
+    await sql`UPDATE rounds SET word = ${wordEntry.word}, real_definition = ${realDefinition} WHERE id = ${round.id}`;
 
     return NextResponse.json({ success: true, word: wordEntry.word });
   } catch (error) {

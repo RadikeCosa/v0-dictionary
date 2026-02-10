@@ -9,16 +9,20 @@ export async function POST(
   try {
     const { roomId } = await params;
     // Obtener la ronda actual
-    const rounds = await sql`SELECT * FROM rounds WHERE room_id = ${roomId} ORDER BY id DESC LIMIT 1`;
+    const rounds =
+      await sql`SELECT * FROM rounds WHERE room_id = ${roomId} ORDER BY id DESC LIMIT 1`;
     if (rounds.length === 0)
       return NextResponse.json({ error: "No round found" }, { status: 404 });
 
     const round = rounds[0];
 
     // Obtener definiciones de la ronda
-    const defs = await sql`SELECT * FROM definitions WHERE round_id = ${round.id}`;
-    // Validar que ningún jugador esté listo
-    const anyReady = defs.some((d) => d.is_ready);
+    const defs =
+      await sql`SELECT * FROM definitions WHERE round_id = ${round.id}`;
+    // Validar que ningún jugador esté listo (soporta boolean y string)
+    const anyReady = defs.some(
+      (d) => d.is_ready === true || d.is_ready === "true",
+    );
     if (anyReady)
       return NextResponse.json(
         { error: "Players already ready" },
@@ -26,7 +30,8 @@ export async function POST(
       );
 
     // Obtener palabras usadas
-    const usedRounds = await sql`SELECT word FROM rounds WHERE room_id = ${roomId}`;
+    const usedRounds =
+      await sql`SELECT word FROM rounds WHERE room_id = ${roomId}`;
     const usedWords = usedRounds.map((r) => r.word);
     // Agregar la palabra actual si no está
     if (!usedWords.includes(round.word)) usedWords.push(round.word);
@@ -45,6 +50,9 @@ export async function POST(
     return NextResponse.json({ success: true, word: wordEntry.word });
   } catch (error) {
     console.error("Error skipping word:", error);
-    return NextResponse.json({ error: "Error al saltar palabra" }, { status: 500 });
+    return NextResponse.json(
+      { error: "Error al saltar palabra" },
+      { status: 500 },
+    );
   }
 }

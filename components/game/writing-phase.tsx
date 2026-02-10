@@ -67,7 +67,16 @@ export function WritingPhase({
         method: "POST",
       });
       const data = await res.json();
+      console.log("Respuesta skip-word:", data);
       if (!res.ok) throw new Error(data.error);
+      // Verificar si la palabra realmente cambió
+      setTimeout(() => {
+        if (currentRound.word === data.word) {
+          setError(
+            "La palabra no cambió. Intenta de nuevo o revisa el backend.",
+          );
+        }
+      }, 1000);
       onRefresh();
     } catch (err) {
       setError(err instanceof Error ? err.message : "Error al saltar palabra");

@@ -47,11 +47,12 @@ export function VotingPhase({
       let hash = 0;
       for (let i = 0; i < seed.length; i++) {
         hash = (hash << 5) - hash + seed.charCodeAt(i);
-        hash = hash & hash;
+        hash = hash | 0; // Convert to 32-bit integer
       }
       return function () {
-        hash = (hash * 9301 + 49297) % 233280;
-        return hash / 233280;
+        // Linear Congruential Generator with better parameters
+        hash = (hash * 1664525 + 1013904223) | 0;
+        return (hash >>> 0) / 4294967296;
       };
     }
 
